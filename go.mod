@@ -1,4 +1,4 @@
-module gbins
+module github.com/dshibin/gbins
 
 go 1.17
 
