@@ -5,9 +5,9 @@ package gmiddleware
 
 import (
 	"context"
+	"github.com/dshibin/gbins/gconf"
+	"github.com/dshibin/gbins/gret"
 	"github.com/gin-gonic/gin"
-	"gbins/gconf"
-	"gbins/gret"
 	"net/http"
 	"time"
 )
@@ -40,12 +40,12 @@ func GTimeout() gin.HandlerFunc {
 		case <-finish:
 		}
 
-		ret , exist := c.Get(gret.GRet)
+		ret, exist := c.Get(gret.GRet)
 		if !exist {
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{"code": r.Code, "msg": r.Msg, "seq": c.GetString(gret.Seqkey)})
 			return
 		}
-		r , ok := ret.(gret.RetM)
+		r, ok := ret.(gret.RetM)
 		if !ok {
 			c.AbortWithStatusJSON(http.StatusOK, gin.H{"code": r.Code, "msg": r.Msg, "seq": c.GetString(gret.Seqkey)})
 			return

@@ -3,22 +3,22 @@ package gredis
 import (
 	"encoding/json"
 	"fmt"
-	"gbins/gconf"
+	"github.com/dshibin/gbins/gconf"
 	"github.com/go-redis/redis/v8"
 	"time"
 )
 
 var (
-	rdb = &redis.Client{}
-	dsn = ""
+	rdb         = &redis.Client{}
+	dsn         = ""
 	serviceName = "redis"
 )
 
-func init()  {
+func init() {
 	selectRedis()
 	err := setRedis()
 	if err != nil {
-		panic(fmt.Sprintf("redis is wrong : ",err.Error))
+		panic(fmt.Sprintf("redis is wrong : ", err.Error))
 	}
 }
 
@@ -27,18 +27,18 @@ func NewRedis() *redis.Client {
 	return rdb
 }
 
-func selectRedis()  {
-	if gconf.GConfByClientName(serviceName).Target != ""{
+func selectRedis() {
+	if gconf.GConfByClientName(serviceName).Target != "" {
 		serviceName = gconf.GConfByClientName(serviceName).Target
 	}
 	return
 }
 
 func setRedis() error {
-	if dsn != gconf.GetRVal(serviceName){
+	if dsn != gconf.GetRVal(serviceName) {
 		dsn = gconf.GetRVal(serviceName)
 		redisOpt := defaultRedisOpt()
-		err := json.Unmarshal([]byte(dsn) , redisOpt)
+		err := json.Unmarshal([]byte(dsn), redisOpt)
 		if err != nil {
 			return err
 		}
@@ -49,14 +49,14 @@ func setRedis() error {
 	return nil
 }
 
-func initHook(r *redis.Client)  {
+func initHook(r *redis.Client) {
 	r.AddHook(&gredisLogHook{})
 	return
 }
 
 func defaultRedisOpt() *redis.Options {
 	return &redis.Options{
-		DialTimeout : 800 * time.Millisecond,
-		PoolSize : 1000,
+		DialTimeout: 800 * time.Millisecond,
+		PoolSize:    1000,
 	}
 }

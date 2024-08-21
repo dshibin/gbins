@@ -2,12 +2,12 @@ package glog
 
 import (
 	"fmt"
+	"github.com/dshibin/gbins/gconf"
 	"github.com/gin-gonic/gin"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
-	"gbins/gconf"
 )
 
 var logger = &zap.Logger{}

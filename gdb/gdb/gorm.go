@@ -2,10 +2,10 @@ package gdb
 
 import (
 	"fmt"
+	"github.com/dshibin/gbins/gconf"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"gbins/gconf"
 	"strings"
 )
 

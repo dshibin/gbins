@@ -1,9 +1,9 @@
 package gmiddleware
 
 import (
+	"github.com/dshibin/gbins/glog"
+	"github.com/dshibin/gbins/greq"
 	"github.com/gin-gonic/gin"
-	"gbins/glog"
-	"gbins/greq"
 	"strings"
 )
 

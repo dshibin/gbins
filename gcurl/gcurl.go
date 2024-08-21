@@ -3,12 +3,12 @@ package gcurl
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/dshibin/gbins/gconf"
+	"github.com/dshibin/gbins/glog"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"io/ioutil"
 	"net/http"
-	"gbins/gconf"
-	"gbins/glog"
 	"strings"
 	"time"
 )

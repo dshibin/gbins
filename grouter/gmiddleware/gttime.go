@@ -2,8 +2,8 @@ package gmiddleware
 
 import (
 	"encoding/json"
-	"gbins/glog"
-	"gbins/gret"
+	"github.com/dshibin/gbins/glog"
+	"github.com/dshibin/gbins/gret"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"time"

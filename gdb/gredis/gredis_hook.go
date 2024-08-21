@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"gbins/glog"
+	"github.com/dshibin/gbins/glog"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"go.uber.org/zap"
@@ -35,7 +35,7 @@ func (g *gredisLogHook) AfterProcess(ctx context.Context, cmd redis.Cmder) error
 	} else {
 		glog.Debugz(c, fmt.Sprint(cmd.FullName(), cmd.Args()), zap.String(glog.ConstTotalTime, cost.String()))
 	}
-	if errors.Is(cmd.Err() , redis.Nil) {
+	if errors.Is(cmd.Err(), redis.Nil) {
 		cmd.SetErr(nil)
 	}
 	return nil

@@ -2,10 +2,10 @@ package gmiddleware
 
 import (
 	"fmt"
+	"github.com/dshibin/gbins/gconf"
+	"github.com/dshibin/gbins/gret"
+	"github.com/dshibin/gbins/gutil"
 	"github.com/gin-gonic/gin"
-	"gbins/gconf"
-	"gbins/gret"
-	"gbins/gutil"
 	"math/rand"
 	"strconv"
 	"sync"

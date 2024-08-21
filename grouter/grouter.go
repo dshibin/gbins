@@ -1,8 +1,8 @@
 package grouter
 
 import (
-	"gbins/gconf"
-	"gbins/grouter/gmiddleware"
+	"github.com/dshibin/gbins/gconf"
+	"github.com/dshibin/gbins/grouter/gmiddleware"
 	"github.com/gin-gonic/gin"
 	"strings"
 )

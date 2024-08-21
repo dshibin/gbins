@@ -4,8 +4,8 @@
 package gcron
 
 import (
-	"gbins/glog"
-	"gbins/grouter/gmiddleware"
+	"github.com/dshibin/gbins/glog"
+	"github.com/dshibin/gbins/grouter/gmiddleware"
 	"github.com/gin-gonic/gin"
 	"github.com/robfig/cron/v3"
 )
