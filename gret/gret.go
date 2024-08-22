@@ -1,6 +1,7 @@
 package gret
 
 import (
+	"github.com/dshibin/gbins/gerrs"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,9 +20,10 @@ func RetNo(code int64, msg string) RetM {
 	return RetM{Code: code, Msg: msg}
 }
 
-func Ret(c *gin.Context, r RetM, data ...interface{}) {
-	if r.Code == 0 {
-		r.Msg = "success"
+func Ret(c *gin.Context, e error, data ...interface{}) {
+	r := RetM{
+		Code: gerrs.Code(e),
+		Msg:  gerrs.Msg(e),
 	}
 	if len(data) > 0 && r.Code == 0 {
 		r.Data = data[0]

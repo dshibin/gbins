@@ -3,6 +3,7 @@ package gmiddleware
 import (
 	"fmt"
 	"github.com/dshibin/gbins/gconf"
+	"github.com/dshibin/gbins/gerrs"
 	"github.com/dshibin/gbins/gret"
 	"github.com/dshibin/gbins/gutil"
 	"github.com/gin-gonic/gin"
@@ -44,7 +45,7 @@ func GSeq() gin.HandlerFunc {
 		if c.GetString(SeqKey) == "" {
 			seq := CreateSeq()
 			if seq == "" {
-				gret.Ret(c, gret.ReqTooMore)
+				gret.Ret(c, gerrs.RetMoreReq)
 				return
 			}
 			c.Set(SeqKey, seq)

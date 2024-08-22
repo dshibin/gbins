@@ -18,6 +18,8 @@ type Error struct {
 var (
 	RetOK      = New(0, "success")
 	RetUnKnown = New(-10001, "unknown error")
+	RetTimeout = New(-10002, "time out")
+	RetMoreReq = New(-10003, "Frequent network requests")
 )
 
 // 获取错误信息

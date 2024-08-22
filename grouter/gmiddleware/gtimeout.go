@@ -6,6 +6,7 @@ package gmiddleware
 import (
 	"context"
 	"github.com/dshibin/gbins/gconf"
+	"github.com/dshibin/gbins/gerrs"
 	"github.com/dshibin/gbins/gret"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -20,7 +21,6 @@ func GTimeout() gin.HandlerFunc {
 
 		ctx, cancel := context.WithTimeout(c, time.Duration(gconf.GConfig().Server.Timeout)*time.Millisecond)
 		c.Request = c.Request.WithContext(ctx)
-		r := gret.TimeOut
 		finish := make(chan struct{}, 1)
 
 		defer func() {
@@ -36,18 +36,18 @@ func GTimeout() gin.HandlerFunc {
 		select {
 		case <-ctx.Done():
 			c.Abort()
-			gret.Ret(c, r)
+			gret.Ret(c, gerrs.RetTimeout)
 		case <-finish:
 		}
 
 		ret, exist := c.Get(gret.GRet)
 		if !exist {
-			c.AbortWithStatusJSON(http.StatusOK, gin.H{"code": r.Code, "msg": r.Msg, "seq": c.GetString(gret.Seqkey)})
-			return
+			gret.Ret(c, gerrs.RetUnKnown)
+			ret, exist = c.Get(gret.GRet)
 		}
 		r, ok := ret.(gret.RetM)
 		if !ok {
-			c.AbortWithStatusJSON(http.StatusOK, gin.H{"code": r.Code, "msg": r.Msg, "seq": c.GetString(gret.Seqkey)})
+			c.AbortWithStatusJSON(http.StatusOK, gin.H{"code": gerrs.RetUnKnown.(*gerrs.Error).Code, "msg": gerrs.RetUnKnown.(*gerrs.Error).Msg, "seq": c.GetString(gret.Seqkey)})
 			return
 		}
 		if r.Data == nil {
