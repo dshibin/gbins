@@ -32,7 +32,7 @@ func DoCron(fc func(c *gin.Context)) func() {
 		ctx.Set(gmiddleware.SeqKey, gmiddleware.CreateSeq())
 		defer func() {
 			err := recover()
-			if err == nil {
+			if err != nil {
 				glog.Error(ctx, "DoCron err : ", err)
 			}
 		}()
